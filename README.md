@@ -165,16 +165,6 @@ git config --global user.email "your.email@example.com"
 
 This information appears on every commit you make.
 
-### Run Setup Script
-
-After cloning (Step 2), run this **once**:
-
-```bash
-bash setup.sh
-```
-
-This installs pytest automatically.
-
 ---
 
 ## 5. Step 1 – Fork the Repository
