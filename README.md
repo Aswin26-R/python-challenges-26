@@ -1,12 +1,32 @@
-# Python Challenges – Internship Program
+<div align="center">
 
-Welcome! This repository contains **40 Python programming challenges** designed for our internship program.
+<img src="https://www.python.org/static/community_logos/python-logo-master-v3-TM.png" alt="Python Logo" width="300"/>
 
-If you have never written Python before — that is perfectly fine.
-If you have never used Git or GitHub before — also perfectly fine.
-This guide explains everything from scratch.
+# 🚀 Python Challenges – Internship Program
 
-Read this entire document before starting your first challenge.
+![Python](https://img.shields.io/badge/Python-3.11+-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![Level](https://img.shields.io/badge/Level-Beginner%20→%20Expert-brightgreen?style=for-the-badge)
+![Challenges](https://img.shields.io/badge/Challenges-40-orange?style=for-the-badge)
+![Tests](https://img.shields.io/badge/Tests-pytest-blue?style=for-the-badge)
+
+**Welcome to your Python journey! 🎉**
+
+</div>
+
+---
+
+Hey there! We are really excited to have you here 👋
+
+This repository has **40 Python challenges** built just for you — from your very first line of code all the way to writing production-quality Python.
+
+> 🟢 **Never written Python before?** Perfect — start at Challenge 01.
+> 🟢 **Never used Git or GitHub?** No problem — this guide walks you through every single step.
+
+Take a deep breath. Read this guide fully. Then dive in — one challenge at a time.
+
+---
+
+> 💡 **Tip:** Bookmark this page. You will come back to it many times.
 
 ---
 
@@ -144,6 +164,16 @@ git config --global user.email "your.email@example.com"
 ```
 
 This information appears on every commit you make.
+
+### Run Setup Script
+
+After cloning (Step 2), run this **once**:
+
+```bash
+bash setup.sh
+```
+
+This installs pytest automatically.
 
 ---
 
@@ -617,6 +647,16 @@ git log --oneline # recent commits
 
 ---
 
+---
+
+<div align="center">
+
+### You've got this! 💪
+
 Your mentors are here to help. Ask questions early, ask questions often.
 
 Every professional developer started exactly where you are now.
+
+*The only way to learn programming is to write programs — so let's go!* 🐍
+
+</div>
