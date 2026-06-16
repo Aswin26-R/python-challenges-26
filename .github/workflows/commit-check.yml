@@ -1,0 +1,56 @@
+name: Check Commit Messages
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  check-commits:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check commit messages
+        run: |
+          FAILED=0
+
+          while IFS= read -r msg; do
+            [ -z "$msg" ] && continue
+
+            LOWER=$(echo "$msg" | tr '[:upper:]' '[:lower:]' | xargs)
+
+            # Rule 1: minimum 15 characters
+            if [ ${#msg} -lt 15 ]; then
+              echo "❌ Too short (min 15 chars): '$msg'"
+              FAILED=1
+              continue
+            fi
+
+            # Rule 2: blocklist of lazy messages
+            case "$LOWER" in
+              done|stuff|aaa|bbb|wip|test|fix|update|changes|misc|asdf|ok|temp|edit|work|progress|commit|added|modified)
+                echo "❌ Too vague: '$msg'"
+                FAILED=1
+                continue
+                ;;
+            esac
+
+            echo "✅ OK: '$msg'"
+          done <<< "$(git log origin/main..HEAD --format='%s')"
+
+          if [ "$FAILED" -eq 1 ]; then
+            echo ""
+            echo "──────────────────────────────────────────"
+            echo "Fix your commit messages and push again."
+            echo ""
+            echo "Good examples:"
+            echo "  Complete challenge 01: hello world"
+            echo "  Fix failing test in challenge 03"
+            echo "  Fix: address review feedback on greet function"
+            echo "──────────────────────────────────────────"
+            exit 1
+          fi
+
+          echo "All commit messages look good!"
