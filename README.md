@@ -68,7 +68,7 @@ Your pull requests are your work history. Mentors can see how you think, how you
 Here is the big picture:
 
 ```
-Company Repository (this repo)
+zad-internship/python-challenges (this repo)
          |
          | You "fork" it → creates your own copy on GitHub
          ↓
@@ -86,7 +86,7 @@ Your Fork on GitHub (updated)
          |
          | You open a "Pull Request" → asks company repo to review your work
          ↓
-Company Repository receives Pull Request
+zad-internship/python-challenges receives Pull Request
          |
          | Mentor reviews your code and leaves comments
          ↓
@@ -150,12 +150,12 @@ This information appears on every commit you make.
 ## 5. Step 1 – Fork the Repository
 
 **What is a fork?**
-A fork is your own personal copy of this repository on your GitHub account. You cannot push directly to the company repository — you push to your fork instead.
+A fork is your own personal copy of this repository on your GitHub account. You cannot push directly to `zad-internship/python-challenges` — you push to your fork instead.
 
 **How to fork:**
 
 1. Log into GitHub
-2. Go to the company repository page (URL from your mentor)
+2. Go to `https://github.com/zad-internship/python-challenges`
 3. Click the **"Fork"** button in the top-right corner
 4. Choose your personal account as the destination
 5. Wait a few seconds while GitHub copies the repository
@@ -174,7 +174,7 @@ Cloning downloads the repository from GitHub to your computer so you can work on
 
 **How to clone:**
 
-1. Go to YOUR fork on GitHub (not the company repository)
+1. Go to YOUR fork on GitHub (not `zad-internship/python-challenges`)
 2. Click the green **"Code"** button
 3. Make sure **HTTPS** is selected
 4. Copy the URL: `https://github.com/YOUR-USERNAME/python-challenges.git`
@@ -354,7 +354,7 @@ A Pull Request is a formal code submission. It shows mentors exactly what you wr
 1. Go to YOUR fork on GitHub
 2. Click **"Compare & pull request"** (yellow banner)
 3. Verify the settings:
-   - **Base repository:** company repository
+   - **Base repository:** `zad-internship/python-challenges`
    - **Base branch:** `main`
    - **Head repository:** YOUR fork
    - **Compare branch:** `challenge-01-hello-world`
