@@ -1,0 +1,45 @@
+name: Run Tests
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install pytest
+        run: pip install pytest
+
+      - name: Detect changed challenge and run its tests
+        run: |
+          # Find which starter.py changed in this PR
+          CHANGED=$(git diff origin/main...HEAD --name-only | grep "starter.py" | head -1)
+
+          if [ -z "$CHANGED" ]; then
+            echo "No starter.py changed. Running all tests."
+            pytest --tb=short -v
+            exit $?
+          fi
+
+          # Get the challenge folder from the changed file path
+          CHALLENGE_DIR=$(dirname "$CHANGED")
+          TEST_DIR="$CHALLENGE_DIR/tests"
+
+          echo "Changed file: $CHANGED"
+          echo "Running tests in: $TEST_DIR"
+          echo ""
+
+          if [ ! -d "$TEST_DIR" ]; then
+            echo "No tests folder found at $TEST_DIR"
+            exit 1
+          fi
+
+          pytest "$TEST_DIR" -v
