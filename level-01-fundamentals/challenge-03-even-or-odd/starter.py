@@ -1,23 +1,10 @@
 def is_even(number):
-    """
-    TODO:
-    Return True if the number is even, False if the number is odd.
-
-    A number is even when dividing it by 2 leaves no remainder.
-
-    Examples:
-        is_even(4)  should return True
-        is_even(7)  should return False
-        is_even(0)  should return True   (zero is even!)
-        is_even(-4) should return True   (negative even numbers count)
-
-    Hint: Use the modulo operator: number % 2
-          If number % 2 == 0, the number is even.
-    """
+    return number % 2 == 0
     pass
 
 
 def is_odd(number):
+    return number % 2!=0
     """
     TODO:
     Return True if the number is odd, False if the number is even.
@@ -35,17 +22,12 @@ def is_odd(number):
 
 
 def classify_number(number):
-    """
-    TODO:
-    Return the string "even" if the number is even,
-    or the string "odd" if the number is odd.
-
-    Examples:
-        classify_number(6)  should return "even"
-        classify_number(9)  should return "odd"
-        classify_number(0)  should return "even"
-        classify_number(-3) should return "odd"
-
-    Note: Return the word as a lowercase string: "even" or "odd"
-    """
+    if number % 2==0:
+        return "even"
+    else:
+        return "odd"
     pass
+
+print(is_even(2))
+print(is_odd(5))
+print(classify_number(-5))
