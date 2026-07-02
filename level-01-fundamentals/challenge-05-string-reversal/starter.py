@@ -1,11 +1,12 @@
-def clean_string(text):
-    return text.lower().replace(" ","")
+def reverse_string(text):
+    return text[::-1]
     pass
 
-def is_palindrome(text):
-    cleaned = clean_string(text)
-    return cleaned == cleaned[::-1]
+def reverse_words(sentence):
+    words = sentence.split()
+    words.reverse()
+    return " ".join(words)
     pass
 
-print(clean_string("ASwin"))
-print(is_palindrome("A man a plan a canal Panama"))
+print(reverse_string("hello"))
+print(reverse_words("hello world"))
