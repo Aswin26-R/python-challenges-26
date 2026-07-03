@@ -1,3 +1,4 @@
+
 # Challenge 12: Fibonacci Sequence
 
 **Level:** 2 – Intermediate Python
