@@ -1,10 +1,8 @@
-import pytest
 import sys
 import os
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from starter import calculate_average, get_letter_grade, create_report
-
 
 class TestCalculateAverage:
     def test_basic_average(self):
