@@ -1,9 +1,6 @@
 import functools
 import time
-
-
-def timer(func):
-    """
+"""
     TODO:
     A decorator that measures and prints how long the wrapped function takes to run.
 
@@ -31,16 +28,28 @@ def timer(func):
                 print(f"{func.__name__} took {elapsed:.2f} seconds")
                 return result
             return wrapper
-    """
+"""
+def timer(func):
     @functools.wraps(func)
     def wrapper(*args, **kwargs):
-        # TODO: Record start time, call func, record end time, print elapsed, return result
-        pass
+        start = time.time()
+        result = func(*args, **kwargs)
+        end = time.time()
+        elapsed = end - start
+        print(f"{func.__name__} took {elapsed:.2f} seconds")
+        return result
     return wrapper
 
+@timer
+def slow_function():
+    time.sleep(0.1)
+    return "done"
+result =  slow_function
+print(slow_function())
 
-def logger(func):
-    """
+
+
+"""
     TODO:
     A decorator that logs (prints) information about function calls.
 
@@ -61,16 +70,28 @@ def logger(func):
         # Prints: "Calling add with args=(3, 4) kwargs={}"
         # Prints: "add returned 7"
         # result == 7
-    """
+"""
+def logger(func):
     @functools.wraps(func)
     def wrapper(*args, **kwargs):
+        print(f"Calling {func.__name__} with args={args} kwargs={kwargs}")
+        result = func(*args, **kwargs)
+        print(f"{func.__name__} returned {result}")
+        return result
         # TODO: Print the "Calling..." message, call func, print the "returned" message, return result
         pass
     return wrapper
+@logger
+def add(a,b):
+    return a + b
+
+result = add(3,4) 
+print(result)
 
 
-def validate_positive(func):
-    """
+
+
+"""
     TODO:
     A decorator that validates all positional arguments are positive numbers (> 0).
     If any argument is 0 or negative, raise ValueError("All arguments must be positive").
@@ -90,9 +111,21 @@ def validate_positive(func):
             if arg <= 0:
                 raise ValueError("All arguments must be positive")
         return func(*args, **kwargs)
-    """
+"""
+def validate_positive(func):
+    
     @functools.wraps(func)
     def wrapper(*args, **kwargs):
+        for arg in args:
+            if arg <= 0:
+                raise ValueError("All arguments must be positive")
+        return func(*args,**kwargs)
         # TODO: Check each argument, raise ValueError if any is not positive, then call func
         pass
     return wrapper
+
+@validate_positive
+def multiply(a,b):
+    return a*b
+
+print(multiply(3,4))
