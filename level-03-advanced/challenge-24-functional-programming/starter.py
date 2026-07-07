@@ -14,7 +14,10 @@ def apply_to_all(func, items):
 
     Hint: list(map(func, items))
     """
+    lists = list(map(func, items))
+    return lists
     pass
+print(apply_to_all(lambda x: x**2, [1,2,3]))
 
 
 def keep_if(func, items):
@@ -30,8 +33,10 @@ def keep_if(func, items):
 
     Hint: list(filter(func, items))
     """
+    filtering = list(filter(func, items))
+    return filtering
     pass
-
+print(keep_if(lambda s: len(s) > 3, ['good','hello','bye']))
 
 def reduce_list(func, items, initial):
     """
@@ -53,8 +58,12 @@ def reduce_list(func, items, initial):
     Hint: from functools import reduce  (already imported at top)
           reduce(func, items, initial)
     """
+    result = initial
+    for item in items:
+        result = func(result,item)
+    return result
     pass
-
+print(reduce_list(lambda acc, x: acc * x, [1, 2, 3, 4], 1))
 
 def pipeline(value, *funcs):
     """
@@ -74,8 +83,12 @@ def pipeline(value, *funcs):
             result = func(result)
         return result
     """
+    result = value
+    for func in funcs:
+        result = func(result)
+    return result
     pass
-
+print(pipeline(5,lambda x: x*2,lambda x: x+1, lambda x:x**2))
 
 def compose(f, g):
     """
@@ -95,4 +108,9 @@ def compose(f, g):
 
     Hint: return lambda x: f(g(x))
     """
+    return lambda x: f(g(x))
     pass
+add_one = lambda x: x+1
+double = lambda x: x*2
+double_then_add = compose(add_one,double) 
+print(double_then_add(5))
