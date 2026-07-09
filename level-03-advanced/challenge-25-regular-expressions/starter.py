@@ -1,8 +1,7 @@
 import re
+"""
+COMPLETED 
 
-
-def is_valid_email(email):
-    """
     TODO:
     Return True if the email address matches a basic valid format, False otherwise.
 
@@ -23,11 +22,16 @@ def is_valid_email(email):
     Hint: Pattern: r'^[\w.+-]+@[\w-]+\.[\w.]+$'
     Use re.match() and check if the result is not None.
     """
+    
+def is_valid_email(email):
+
+    pattern = r'^[\w.+-]+@[\w-]+\.[\w.]+$'
+    return re.match(pattern,email) is not None
     pass
+print(is_valid_email("aswinr1264@gmail.com"))
 
 
-def extract_numbers(text):
-    """
+"""
     TODO:
     Return a list of all numbers (sequences of digits) found in the text.
 
@@ -40,11 +44,13 @@ def extract_numbers(text):
     Hint: re.findall(r'\d+', text)
           \d matches a digit, + means one or more.
     """
+
+def extract_numbers(text):
+    return re.findall(r'\d+',text)
     pass
+print(extract_numbers("Room 101 at 9pm"))
 
-
-def is_valid_phone(phone):
-    """
+"""
     TODO:
     Return True if the phone number matches the format: +XX-XXX-XXX-XXXX
     Where X is any digit.
@@ -63,11 +69,15 @@ def is_valid_phone(phone):
 
     Hint: Pattern: r'^\+\d{2}-\d{3}-\d{3}-\d{4}$'
     """
+def is_valid_phone(phone):
+    pattern = r'^\+\d{2}-\d{3}-\d{3}-\d{4}$'
+    return re.match(pattern,phone) is not None
     pass
+print(is_valid_phone("+91-638-000-3075"))
 
 
-def replace_whitespace(text):
-    """
+
+"""
     TODO:
     Replace consecutive whitespace (spaces and/or tabs) with a single space.
 
@@ -82,11 +92,14 @@ def replace_whitespace(text):
           + means one or more
           Replace all such sequences with a single space ' '
     """
+def replace_whitespace(text):
+    return re.sub(r'[ \t]+',' ', text)
+   
     pass
+print(replace_whitespace("a  b\t\tc  d"))
 
 
-def extract_hashtags(text):
-    """
+"""
     TODO:
     Return a list of all hashtags found in the text.
     A hashtag starts with # followed by one or more word characters.
@@ -105,4 +118,7 @@ def extract_hashtags(text):
           # is literal hash character
           \w+ is one or more word characters (letters, digits, underscore)
     """
+def extract_hashtags(text):
+    return re.findall(r'#\w+',text)
     pass
+print(extract_hashtags("I love #python and #coding is #fun"))
