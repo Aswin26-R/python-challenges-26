@@ -1,166 +1,135 @@
-class Stack:
+def binary_search_iterative(arr, target):
     """
     TODO:
-    Implement a Stack data structure (Last In, First Out — LIFO).
+    Find target in the sorted list arr using an iterative (loop-based) binary search.
+    Return the INDEX of target if found.
+    Return -1 if target is not in the list.
 
-    A stack works like a stack of plates:
-    - You can only add (push) to the top
-    - You can only remove (pop) from the top
-    - The most recently added item comes out first
+    The list is SORTED in ascending order.
 
-    Internal storage: use a list called self._items = []
+    Examples:
+        binary_search_iterative([1, 3, 5, 7, 9, 11], 7)  → 3
+        binary_search_iterative([1, 3, 5, 7, 9, 11], 4)  → -1
+        binary_search_iterative([1, 3, 5, 7, 9, 11], 1)  → 0
+        binary_search_iterative([1, 3, 5, 7, 9, 11], 11) → 5
+        binary_search_iterative([], 5)                     → -1
 
-    Methods to implement:
-        push(item)   — add item to the top
-        pop()        — remove and return the top item
-        peek()       — return the top item WITHOUT removing it
-        is_empty()   — return True if the stack has no items
-        size()       — return the number of items
+    Algorithm:
+        low = 0
+        high = len(arr) - 1
+
+        while low <= high:
+            mid = (low + high) // 2
+
+            if arr[mid] == target:
+                return mid        ← found it!
+            elif arr[mid] < target:
+                low = mid + 1     ← search right half
+            else:
+                high = mid - 1    ← search left half
+
+        return -1  ← not found
     """
+    
+    low = 0
+    high = len(arr) - 1
+    while low <= high:
+        mid = (low + high) // 2
+        if arr[mid] == target:
+            return mid 
+        elif arr[mid] < target:
+            low = mid + 1
+        else:
+            high = mid - 1
+    return -1 
+    pass
 
-    def __init__(self):
-        self._items = []
-
-    def push(self, item):
-        """
-        TODO: Add item to the top of the stack.
-
-        Example:
-            stack = Stack()
-            stack.push(1)
-            stack.push(2)
-            stack.push(3)
-            # stack now has [1, 2, 3], with 3 on top
-
-        Hint: self._items.append(item)
-        """
-        pass
-
-    def pop(self):
-        """
-        TODO: Remove and return the top item from the stack.
-        If the stack is empty, raise IndexError("Stack is empty").
-
-        Example:
-            stack.push(1); stack.push(2)
-            stack.pop()  → 2  (most recently added)
-            stack.pop()  → 1
-
-        Hint:
-            if self.is_empty():
-                raise IndexError("Stack is empty")
-            return self._items.pop()
-        """
-        pass
-
-    def peek(self):
-        """
-        TODO: Return the top item WITHOUT removing it.
-        If the stack is empty, raise IndexError("Stack is empty").
-
-        Example:
-            stack.push(1); stack.push(2)
-            stack.peek()  → 2  (doesn't change the stack)
-            stack.size()  → 2  (still 2 items)
-
-        Hint: return self._items[-1]
-        """
-        pass
-
-    def is_empty(self):
-        """
-        TODO: Return True if the stack has no items, False otherwise.
-
-        Example:
-            stack = Stack()
-            stack.is_empty()  → True
-            stack.push(1)
-            stack.is_empty()  → False
-
-        Hint: return len(self._items) == 0
-        """
-        pass
-
-    def size(self):
-        """
-        TODO: Return the number of items currently in the stack.
-
-        Example:
-            stack.push(1); stack.push(2)
-            stack.size()  → 2
-
-        Hint: return len(self._items)
-        """
-        pass
+print(binary_search_iterative([], 5))
 
 
-class Queue:
+def binary_search_recursive(arr, target, low=0, high=None):
     """
     TODO:
-    Implement a Queue data structure (First In, First Out — FIFO).
+    Find target using RECURSIVE binary search.
+    Return the index of target, or -1 if not found.
 
-    A queue works like a line of people:
-    - You join (enqueue) at the BACK
-    - You leave (dequeue) from the FRONT
-    - The first one in is the first one out
+    Examples:
+        binary_search_recursive([1, 3, 5, 7, 9, 11], 7)  → 3
+        binary_search_recursive([1, 3, 5, 7, 9, 11], 4)  → -1
 
-    Internal storage: use a list called self._items = []
+    Algorithm (recursive):
+        Base case 1: if low > high, return -1  (not found)
 
-    Methods to implement:
-        enqueue(item) — add item to the back
-        dequeue()     — remove and return the front item
-        front()       — return the front item WITHOUT removing it
-        is_empty()    — return True if the queue has no items
-        size()        — return the number of items
+        mid = (low + high) // 2
+
+        if arr[mid] == target: return mid
+        elif arr[mid] < target: recurse right half
+            return binary_search_recursive(arr, target, mid + 1, high)
+        else: recurse left half
+            return binary_search_recursive(arr, target, low, mid - 1)
+
+    Note: Handle the case where high is None at the start:
+        if high is None:
+            high = len(arr) - 1
     """
+    if  high is None:
+        high = len(arr) - 1
+    if low > high:
+        return -1
+    mid = ( low + high) // 2
+    if arr[mid] == target:
+        return mid
+    elif arr[mid] < target:
+        return binary_search_recursive(arr,target,mid + 1,high)
+    else:
+        return binary_search_recursive(arr,target,low,mid - 1)
+    pass
 
-    def __init__(self):
-        self._items = []
+print(binary_search_recursive([1, 3, 5, 7, 9, 11], 4))
 
-    def enqueue(self, item):
-        """
-        TODO: Add item to the BACK of the queue.
 
-        Example:
-            queue.enqueue("a")
-            queue.enqueue("b")
-            # queue: ["a", "b"], "a" is at the front
+def find_insert_position(arr, target):
+    """
+    TODO:
+    Return the index where target SHOULD be inserted in arr to keep it sorted.
+    If target is already in the list, return the index of its first occurrence.
 
-        Hint: self._items.append(item)
-        """
-        pass
+    Examples:
+        find_insert_position([1, 3, 5, 7, 9], 4)   → 2  (between 3 and 5)
+        find_insert_position([1, 3, 5, 7, 9], 0)   → 0  (before everything)
+        find_insert_position([1, 3, 5, 7, 9], 10)  → 5  (after everything)
+        find_insert_position([1, 3, 5, 7, 9], 5)   → 2  (exactly at index 2)
+        find_insert_position([], 5)                  → 0
 
-    def dequeue(self):
-        """
-        TODO: Remove and return the FRONT item from the queue.
-        If the queue is empty, raise IndexError("Queue is empty").
+    This is similar to binary search, but instead of returning -1 when not found,
+    return the value of 'low' — that's where the target would be inserted.
 
-        Example:
-            queue.enqueue("a"); queue.enqueue("b")
-            queue.dequeue()  → "a"  (first in, first out)
-            queue.dequeue()  → "b"
+    Algorithm:
+        low = 0
+        high = len(arr) - 1
 
-        Hint: return self._items.pop(0)  ← pop from index 0 removes the first item
-        """
-        pass
+        while low <= high:
+            mid = (low + high) // 2
+            if arr[mid] == target:
+                return mid
+            elif arr[mid] < target:
+                low = mid + 1
+            else:
+                high = mid - 1
 
-    def front(self):
-        """
-        TODO: Return the FRONT item WITHOUT removing it.
-        If the queue is empty, raise IndexError("Queue is empty").
+        return low  ← insertion point
+    """
+    low = 0
+    high = len(arr) -1
+    while low <= high:
+        mid = (low + high) // 2
+        if arr[mid] == target:
+            return mid
+        elif arr[mid] < target:
+            low = mid +1
+        else:
+            high = mid - 1
+    return low
+    pass
 
-        Hint: return self._items[0]
-        """
-        pass
-
-    def is_empty(self):
-        """
-        TODO: Return True if the queue is empty, False otherwise.
-        """
-        pass
-
-    def size(self):
-        """
-        TODO: Return the number of items in the queue.
-        """
-        pass
+print(find_insert_position([1, 3, 5, 7, 9], 10))
