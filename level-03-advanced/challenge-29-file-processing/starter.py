@@ -3,7 +3,11 @@ import os
 
 
 def write_file(filepath, content):
+    with open(filepath,"w") as f:
+        f.write(content)
     """
+
+    completed
     TODO:
     Write the content string to the file at filepath.
     Create the file if it doesn't exist, overwrite if it does.
@@ -20,6 +24,8 @@ def write_file(filepath, content):
 
 
 def read_file(filepath):
+    with open(filepath, 'r') as f:
+        return f.read()
     """
     TODO:
     Read and return the entire contents of the file at filepath as a string.
@@ -36,6 +42,9 @@ def read_file(filepath):
 
 
 def count_lines(filepath):
+    with open(filepath,'r') as f:
+        lines = f.read().split('\n')
+    return len([line for line in lines if line.strip()])
     """
     TODO:
     Return the number of non-empty lines in the file.
@@ -56,6 +65,11 @@ def count_lines(filepath):
 
 
 def write_csv(filepath, headers, rows):
+    with open(filepath,'w',newline="") as f:
+        writer = csv.writer(f)
+        writer.writerow(headers)
+        for row in rows:
+            writer.writerow(row)
     """
     TODO:
     Write a CSV file with the given headers and rows.
@@ -76,6 +90,9 @@ def write_csv(filepath, headers, rows):
 
 
 def read_csv(filepath):
+    with open(filepath,'r') as f:
+        reader = csv.DictReader(f)
+        return list(reader)
     """
     TODO:
     Read a CSV file and return a list of dictionaries.
@@ -99,6 +116,9 @@ def read_csv(filepath):
 
 
 def search_in_file(filepath, keyword):
+    with open(filepath, 'r') as f:
+        lines = f.readlines()
+    return [line.strip() for line in lines if keyword in line]
     """
     TODO:
     Return a list of lines from the file that contain the keyword.
